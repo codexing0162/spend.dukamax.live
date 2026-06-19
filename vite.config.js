@@ -2,11 +2,14 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+// GITHUB_REPOSITORY is set automatically by GitHub Actions, e.g. "codexing0162/spend-dukamax-live"
+// When a custom domain (CNAME) is active, GitHub Pages serves from root → base stays '/'.
+// Without a custom domain, Pages serves from /repo-name/ → base must match.
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1]
+const base = process.env.CUSTOM_DOMAIN === 'true' || !repoName ? '/' : `/${repoName}/`
+
 export default defineConfig({
-  // base: '/' works for both custom domains (spend.dukamax.com) and GitHub Pages
-  // when a custom domain (CNAME) is configured on the Pages repo.
-  // Do NOT change this to a repo-relative path — the CNAME makes root the origin.
-  base: '/',
+  base,
 
   plugins: [
     react(),

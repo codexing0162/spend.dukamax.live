@@ -38,6 +38,9 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: production
+          # Set to 'true' once spend.dukamax.live is verified in GitHub Pages settings.
+          # While using the raw codexing0162.github.io/<repo> URL, leave this unset.
+          CUSTOM_DOMAIN: 'true'
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
